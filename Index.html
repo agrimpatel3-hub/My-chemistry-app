@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Molecular Viewer</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+    <style>
+        .mol-container { width: 100%; height: 500px; position: relative; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Interactive 3D Molecule</h1>
+    <div id="container" class="mol-container"></div>
+    <script>
+        $(function() {
+            let element = $('#container');
+            let config = { backgroundColor: '#f0f0f0' };
+            let viewer = $3Dmol.createViewer(element, config);
+
+            // Fetching Glucose (CID: 5793) from PubChem
+            $3Dmol.download("cid:5793", viewer, {}, function() {
+                viewer.setStyle({}, {stick: {radius: 0.2}, sphere: {scale: 0.3}});
+                viewer.zoomTo();
+                viewer.render();
+            });
+        });
+    </script>
+</body>
+</html>
